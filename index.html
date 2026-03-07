@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G I T | Login</title>
     <link rel="stylesheet" href="./style.css">
-    <!-- daisy and tailwind -->
+
+    <!-- tailwindcss and daisyui  -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +43,8 @@
             <!-- Username -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                <input type="text" placeholder="Enter Username"
+                <input id="inputUsername" type="text" placeholder="Enter Username" minlength="5" maxlength="11"
+                    value="admin"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
 
                 <p class="text-xs text-indigo-600 mt-1">Default: admin</p>
@@ -51,14 +54,15 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Password </label>
 
-                <input type="password" placeholder="Enter Password"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                <input id="inputPassword" type="password" placeholder="Enter Password" minlength="7" maxlength="11"
+                    value="admin123"
+                    class="w-full  px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
 
                 <p class="text-xs text-indigo-600 mt-1">Default: admin123</p>
             </div>
 
             <!-- Button -->
-            <button type="submit"
+            <button type="submit" onclick="signIn(event)"
                 class="w-full py-3 mt-2 text-white font-semibold rounded-lg bg-indigo-600 shadow-md cursor-pointer">Sign
                 In</button>
 
