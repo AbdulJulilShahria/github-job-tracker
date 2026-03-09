@@ -16,7 +16,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
     <!-- font awesome -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 
@@ -41,8 +43,7 @@
                 <input type="text" placeholder="Search issues..."
                     class="border rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-purple-500">
 
-                <button
-                    class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
                     + New Issue
                 </button>
 
@@ -67,7 +68,7 @@
 
         <!-- Issue Header -->
         <div class="bg-white p-5 rounded-xl shadow mb-6 flex justify-between items-center">
-            <div class="flex gap-2 items-center"> 
+            <div class="flex gap-2 items-center">
                 <div>
                     <img src="./assets/Aperture.png" alt="">
                 </div>
@@ -76,7 +77,7 @@
                     <h2 class="font-semibold text-lg">50 Issues</h2>
                     <p class="text-gray-500 text-sm">Track and manage your project issues</p>
                 </div>
-                
+
             </div>
             <div class="flex items-center gap-4 text-sm">
 
@@ -96,13 +97,15 @@
 
 
         <!-- Issues Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div id="issuesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- dynamic issue Card  -->
 
             <!-- Issue Card -->
-            <div class="bg-white rounded-xl shadow p-4 border-t-4 border-green-500">
+            <!-- <div class="bg-white rounded-xl shadow p-4 border-t-4 border-green-500">
                 <div class="flex justify-between mb-2">
                     <img src="./assets/Open-Status.png" alt="">
-                    <h3 class="badge badge-soft font-medium badge-warning">
+                    <h3 class="badge badge-soft font-medium badge-secondary">
                         HIGH
                     </h3>
                 </div>
@@ -116,11 +119,11 @@
 
                 <div class="flex gap-2 mb-3">
 
-                    <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded">
+                    <span class="badge badge-soft font-medium badge-secondary">
                         BUG
                     </span>
 
-                    <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">
+                    <span class="badge badge-soft badge-warning">
                         HELP WANTED
                     </span>
 
@@ -133,20 +136,16 @@
                     1/5/2024
                 </div>
 
-            </div>
+            </div> -->
+        </div>
 
-           
-         
-            
-
-
-
-
+        <!-- loading spinner -->
+         <div id="loadingSpinner" class=" justify-center items-center hidden">
+            <span class="loading loading-spinner loading-xl"></span>
+         </div>
 
 
-
-
-    <script src="./script.js"></script>
+        <script src="./script.js"></script>
 </body>
 
 </html>
