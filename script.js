@@ -1,34 +1,48 @@
-function signIn (event){
-    event.preventDefault();
-    const inputUsername = document.getElementById("inputUsername");
-    const userName= inputUsername.value;
-    console.log(userName)
-    const inputPassword = document.getElementById("inputPassword");
-    const password = inputPassword.value;
-    console.log(password)
-    if(userName == "admin" && password == 'admin123'){
-        alert('Login success')
-        window.location.assign('./home.html')
-    }else{
-        alert('login failed')
-        return;
-    }
+function signIn(event) {
+  event.preventDefault();
+  const inputUsername = document.getElementById("inputUsername");
+  const userName = inputUsername.value;
+  console.log(userName);
+  const inputPassword = document.getElementById("inputPassword");
+  const password = inputPassword.value;
+  console.log(password);
+  if (userName == "admin" && password == "admin123") {
+    alert("Login success");
+    window.location.assign("./home.html");
+  } else {
+    alert("login failed");
+    return;
+  }
 }
 
-const issueContainer = document.getElementById('issuesContainer');
+const issueContainer = document.getElementById("issuesContainer");
+const loadingSpinner = document.getElementById("loadingSpinner");
 
-async function loadIssues(){
-    const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
-    const data = await res.json();
-    displayIssues(data.data);
+function showLoading() {
+  loadingSpinner.classList.remove("hidden");
+  loadingSpinner.classList.add("flex");
+  issueContainer.innerHTML = "";
 }
-function displayIssues(issues){
-    console.log(issues)
-    issues.forEach(issue => {
-        console.log(issue)
-        const card = document.createElement('div');
-        card.className = "bg-white rounded-xl shadow p-4 border-t-4 border-green-500";
-        card.innerHTML = `  <div class="flex justify-between mb-2">
+function hideLoading() {
+  loadingSpinner.classList.add("hidden");
+}
+async function loadIssues() {
+  showLoading();
+  const res = await fetch(
+    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+  );
+  const data = await res.json();
+  hideLoading();
+  displayIssues(data.data);
+}
+function displayIssues(issues) {
+  console.log(issues);
+  issues.forEach((issue) => {
+    console.log(issue);
+    const card = document.createElement("div");
+    card.className =
+      "bg-white rounded-xl shadow p-4 border-t-4 border-green-500";
+    card.innerHTML = `  <div class="flex justify-between mb-2">
                 <img src="./assets/Open-Status.png" alt="">
                 <h3 class="badge badge-soft font-medium badge-secondary">
                     ${issue.priority}
@@ -60,12 +74,9 @@ function displayIssues(issues){
                 ${issue.author} <br>
                 ${issue.createdAt}
             </div>
-        `
+        `;
 
-        issueContainer.appendChild(card);
-           
-
-         
-    });
+    issueContainer.appendChild(card);
+  });
 }
 loadIssues();
