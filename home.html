@@ -40,10 +40,10 @@
 
             <div class="flex items-center gap-4">
 
-                <input type="text" placeholder="Search issues..."
+                <input id="inputSearch" type="text" placeholder="Search issues..."
                     class="border rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-purple-500">
 
-                <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                <button onclick="btnSearch()" id="btnSearch" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
                     + New Issue
                 </button>
 
@@ -58,11 +58,16 @@
 
         <!-- Filters -->
         <div class="bg-white p-4 rounded-xl shadow mb-6 flex gap-3">
+            <div>
 
-            <button class="bg-indigo-600 text-white px-8 py-2 rounded-lg text-sm">All</button>
-            <button class="border px-8 py-2 rounded-lg text-sm">Closed</button>
-            <button class="border px-8 py-2 rounded-lg text-sm">Open</button>
+                <button onclick="switchTab('tab-all')" id="tab-all" class="border bg-indigo-600 text-white px-8 py-2 rounded-lg text-sm">All</button>
+                <button onclick="switchTab('tab-closed')" id="tab-closed" class="border px-8 py-2 rounded-lg text-sm">Closed</button>
+                <button onclick="switchTab('tab-open')" id="tab-open" class="border px-8 py-2 rounded-lg text-sm">Open</button>
+                <div id="btnContainer" class="space-x-4">
+                    <!-- btn dynamically added here -->
 
+                </div>
+            </div>
         </div>
 
 
@@ -97,7 +102,7 @@
 
 
         <!-- Issues Grid -->
-        <div id="issuesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div id="issuesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
             <!-- dynamic issue Card  -->
 

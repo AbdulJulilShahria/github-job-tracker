@@ -24,10 +24,24 @@ const updateDate = document.getElementById("updateDate");
 const modalDescription = document.getElementById("modalDescription");
 const assignee = document.getElementById("assignee");
 const priority = document.getElementById("priority");
-const modalStatus = document.getElementById('modalStatus')
+const modalStatus = document.getElementById("modalStatus");
+const btnContainer = document.getElementById("btnContainer");
 
-
-
+// async function loadCategories() {
+//   const res = await fetch(
+//     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+//   );
+//   const data = await res.json();
+//   console.log(data);
+//   data.data.forEach((element) => {
+//     const ele = element.status;
+//     const btn = document.createElement("button");
+//     btn.className = "bg-white p-4 rounded-xl shadow mb-6 ";
+//     btn.textContent = ele;
+//     btnContainer.appendChild(btn);
+//     // console.log(ele)
+//   });
+// }
 
 function showLoading() {
   loadingSpinner.classList.remove("hidden");
@@ -47,16 +61,18 @@ async function loadIssues() {
   displayIssues(data.data);
 }
 function displayIssues(issues) {
-  console.log(issues);
+  // console.log(issues);
   issues.forEach((issue) => {
     console.log(issue);
+    const label = issue.labels;
+    // console.log(label[0], label[1]);
+
     const card = document.createElement("div");
-    card.className =
-      "bg-white rounded-xl shadow p-4 border-t-4 border-green-500";
+    card.className = `bg-white rounded-xl shadow p-4 border-t-4 ${issue.priority == "low" ? "border-indigo-600" : "border-green-500"}`;
     card.innerHTML = `  <div class="flex justify-between mb-2"  >
                 <img src="./assets/Open-Status.png" alt="">
                 <h3 class="badge badge-soft font-medium badge-secondary">
-                    ${issue.priority}
+                    ${issue.priority.toUpperCase()}
                 </h3>
             </div>
             <h3 class="font-semibold text-sm mb-2 cursor-pointer hover:text-indigo-600" onclick="openIssueModal(${issue.id})">
@@ -70,11 +86,11 @@ function displayIssues(issues) {
             <div class="flex gap-2 mb-3">
 
                 <span class="badge badge-soft font-medium badge-secondary">
-                    BUG
+                    ${label[0].toUpperCase()}
                 </span>
 
                 <span class="badge badge-soft badge-warning">
-                    HELP WANTED
+                     ${label[1]}
                 </span>
 
             </div>
@@ -107,4 +123,31 @@ async function openIssueModal(issueId) {
   priority.textContent = issueDetails.priority;
   modalStatus.textContent = issueDetails.status;
 }
+// loadCategories();
 loadIssues();
+async function btnSearch() {
+  const inputSearch = document.getElementById("inputSearch");
+  const searchValue = inputSearch.value.trim().toLowerCase();
+  // console.log(searchValue);
+  const res = await fetch(
+    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+  );
+  const data = await res.json();
+  const allIssue = data.data;
+  console.log(allIssue);
+  const filterIssue = allIssue.filter((issue) =>
+    issue.title.toLowerCase().includes(searchValue),
+  );
+  displayIssues(filterIssue);
+}
+const tabAll=document.getElementById('tab-all')
+const tabClosed=document.getElementById('tab-closed')
+const tabOpen=document.getElementById('tab-open')
+function switchTab(id) {
+  tabAll.classList.remove("bg-indigo-600","text-white")
+  tabClosed.classList.remove("bg-indigo-600","text-white")
+  tabOpen.classList.remove("bg-indigo-600","text-white")
+  
+  const selected = document.getElementById(id);
+   selected.classList.add('bg-indigo-600', 'text-white');
+}
