@@ -140,9 +140,72 @@
         </div>
 
         <!-- loading spinner -->
-         <div id="loadingSpinner" class=" justify-center items-center hidden">
+        <div id="loadingSpinner" class=" justify-center items-center hidden">
             <span class="loading loading-spinner loading-xl"></span>
-         </div>
+        </div>
+
+
+
+        <!-- modal -->
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+        <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+             
+                <div class="bg-white rounded-xl  p-8">
+
+              
+                    <h1 id="modalTitle" class="text-2xl font-bold mb-2">Fix broken image uploads</h1>
+
+               
+                    <div class="flex items-center gap-3 text-sm mb-4">
+                        <span id="modalStatus" class="bg-green-500 text-white px-3 py-1 rounded-full">Opened</span>
+                        <span  class="text-gray-500">Opened by <span id="openByWho"> Fahim Ahmed </span>• <span id="updateDate">22/02/2026</span> </span>
+                    </div>
+
+             
+                    <div class="flex gap-3 mb-4">
+                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium">BUG</span>
+                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">HELP
+                            WANTED</span>
+                    </div>
+
+             
+                    <p id="modalDescription" class="text-gray-600 mb-6">
+                        The navigation menu doesn't collapse properly on mobile devices.
+                        Need to fix the responsive behavior.
+                    </p>
+
+                    
+                    <div class="bg-gray-100 rounded-lg p-5 flex justify-between mb-6">
+
+                       
+                        <div>
+                            <p class="text-gray-500 text-sm">Assignee:</p>
+                            <p id="assignee" class="font-semibold">Fahim Ahmed</p>
+                        </div>
+
+                  
+                        <div>
+                            <p class="text-gray-500 text-sm">Priority:</p>
+                            <span id="priority" class="bg-red-500 text-white text-sm px-3 py-1 rounded-full">
+                                HIGH
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn bg-indigo-600 text-white">Close</button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </dialog>
 
 
         <script src="./script.js"></script>

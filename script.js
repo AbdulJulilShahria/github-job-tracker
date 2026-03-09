@@ -17,6 +17,17 @@ function signIn(event) {
 
 const issueContainer = document.getElementById("issuesContainer");
 const loadingSpinner = document.getElementById("loadingSpinner");
+const modalDetails = document.getElementById("my_modal_1");
+const modalTitle = document.getElementById("modalTitle");
+const openByWho = document.getElementById("openByWho");
+const updateDate = document.getElementById("updateDate");
+const modalDescription = document.getElementById("modalDescription");
+const assignee = document.getElementById("assignee");
+const priority = document.getElementById("priority");
+const modalStatus = document.getElementById('modalStatus')
+
+
+
 
 function showLoading() {
   loadingSpinner.classList.remove("hidden");
@@ -42,17 +53,17 @@ function displayIssues(issues) {
     const card = document.createElement("div");
     card.className =
       "bg-white rounded-xl shadow p-4 border-t-4 border-green-500";
-    card.innerHTML = `  <div class="flex justify-between mb-2">
+    card.innerHTML = `  <div class="flex justify-between mb-2"  >
                 <img src="./assets/Open-Status.png" alt="">
                 <h3 class="badge badge-soft font-medium badge-secondary">
                     ${issue.priority}
                 </h3>
             </div>
-            <h3 class="font-semibold text-sm mb-2">
+            <h3 class="font-semibold text-sm mb-2 cursor-pointer hover:text-indigo-600" onclick="openIssueModal(${issue.id})">
                 ${issue.title}
             </h3>
 
-            <p class="text-gray-500 text-xs mb-3 line-clamp-2">
+            <p class="text-gray-500 text-xs mb-3 line-clamp-2 cursor-pointer hover:text-indigo-600" onclick="openIssueModal(${issue.id})">
                 ${issue.description}
             </p>
 
@@ -70,7 +81,7 @@ function displayIssues(issues) {
             <hr class="opacity-20 my-3">
 
 
-            <div class="text-xs text-gray-400">
+            <div onclick="openIssueModal(${issue.id})" class="cursor-pointer hover:text-indigo-600 text-xs text-gray-400">
                 ${issue.author} <br>
                 ${issue.createdAt}
             </div>
@@ -78,5 +89,22 @@ function displayIssues(issues) {
 
     issueContainer.appendChild(card);
   });
+}
+async function openIssueModal(issueId) {
+  console.log(issueId);
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${issueId}`,
+  );
+  const data = await res.json();
+  const issueDetails = data.data;
+  console.log(issueDetails);
+  modalDetails.showModal();
+  modalTitle.textContent = issueDetails.title;
+  modalDescription.textContent = issueDetails.description;
+  openByWho.textContent = issueDetails.author;
+  updateDate.textContent = issueDetails.updatedAt;
+  assignee.textContent = issueDetails.assignee;
+  priority.textContent = issueDetails.priority;
+  modalStatus.textContent = issueDetails.status;
 }
 loadIssues();
