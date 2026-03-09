@@ -130,7 +130,7 @@ async function btnSearch() {
   const searchValue = inputSearch.value.trim().toLowerCase();
   // console.log(searchValue);
   const res = await fetch(
-    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`,
   );
   const data = await res.json();
   const allIssue = data.data;
@@ -140,14 +140,21 @@ async function btnSearch() {
   );
   displayIssues(filterIssue);
 }
-const tabAll=document.getElementById('tab-all')
-const tabClosed=document.getElementById('tab-closed')
-const tabOpen=document.getElementById('tab-open')
-function switchTab(id) {
-  tabAll.classList.remove("bg-indigo-600","text-white")
-  tabClosed.classList.remove("bg-indigo-600","text-white")
-  tabOpen.classList.remove("bg-indigo-600","text-white")
-  
+const tabAll = document.getElementById("tab-all");
+const tabClosed = document.getElementById("tab-closed");
+const tabOpen = document.getElementById("tab-open");
+
+
+async function switchTab(id) {
+  tabAll.classList.remove("bg-indigo-600", "text-white");
+  tabClosed.classList.remove("bg-indigo-600", "text-white");
+  tabOpen.classList.remove("bg-indigo-600", "text-white");
+
   const selected = document.getElementById(id);
-   selected.classList.add('bg-indigo-600', 'text-white');
+  selected.classList.add("bg-indigo-600", "text-white");
+
+  const res=await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+  const data= await res.json()
+  console.log(data)
+  displayIssues(data.data)
 }
